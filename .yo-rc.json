@@ -1,7 +1,8 @@
 {
   "generator-openapi-repo": {
-    "importExistingSpec": false,
-    "name": "Datastores",
+    "importExistingSpec": true,
+    "importedSpec": "../spec/swagger.yaml",
+    "name": "Datastores API",
     "repo": "thunderheadone/datastores-api",
     "splitSpec": false,
     "samples": false,
