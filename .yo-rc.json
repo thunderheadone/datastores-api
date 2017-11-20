@@ -1,0 +1,10 @@
+{
+  "generator-openapi-repo": {
+    "importExistingSpec": false,
+    "name": "Datastores",
+    "repo": "thunderheadone/datastores-api",
+    "splitSpec": false,
+    "samples": false,
+    "installSwaggerUI": true
+  }
+}
