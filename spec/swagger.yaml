@@ -8,8 +8,6 @@ info:
     between ONE and your existing ecosystem.
   version: 1.0.0
   title: Datastores API documentation
-  x-logo:
-    url: 'https://www.thunderhead.com/uploads/2015/07/Thunderhead_LogoIcon_Aubergine.png'
 tags:
   - name: datastores
     description: Datastores API
@@ -304,12 +302,12 @@ definitions:
         readOnly: true
         type: integer
         format: int64
-        description: Date when datastore was created in milliseconds since Jan 1st 1970 00:00:00
+        description: Date when datastore was created in milliseconds since Jan 1st 1970 (Unix epoch time)
       lastModified:
         type: integer
         readOnly: true
         format: int64
-        description: Date when datastore was last modified in milliseconds since Jan 1st 1970 00:00:00
+        description: Date when datastore was last modified in milliseconds since Jan 1st 1970 (Unix epoch time)
       primaryKey:
         type: string
         example: customerID
@@ -350,9 +348,15 @@ definitions:
       type:
         type: string
         example: TEXT
-        description: >-
-          One of TEXT, BOOLEAN, NUMERIC or DATETIME. The type for Primary and
-          Secondary Keys must be TEXT.
+        description: |
+          Specify the type of data to be stored. One of TEXT, BOOLEAN, NUMBER, DATETIME. The type for Primary and Secondary Keys must be TEXT.
+
+          | Data types | Description                                                  | Example             |
+          | ---------- | ------------------------------------------------------------ | ------------------- |
+          | TEXT       | String enclosed in quotes, single or double. Max 500 chars.  | "Campaigncode 2563" |
+          | BOOLEAN    | An unquoted lower case literal string of true or false.      | true                |
+          | NUMERIC    | An unquoted numeric value, which can include an exponent.    | 1233.667            |
+          | DATETIME   | Milliseconds since Jan 1st 1970 (Unix epoch time)            | 1517443199          |
   InsertRecord:
     required:
       - primaryKey
@@ -403,5 +407,5 @@ securityDefinitions:
     tokenUrl: 'https://<servername>.thunderhead.com/one/oauth2token'
     scopes: {}
 # Added by API Auto Mocking Plugin
-host: eu2.thunderhead.com
+host: virtserver.swaggerhub.com
 basePath: /Thunderhead/Datastores/1.0.0
