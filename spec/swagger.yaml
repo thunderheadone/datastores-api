@@ -8,6 +8,8 @@ info:
     between ONE and your existing ecosystem.
   version: 1.0.0
   title: Datastores API documentation
+  x-logo:
+    url: 'https://www.thunderhead.com/uploads/2015/07/Thunderhead_LogoIcon_Aubergine.png'
 tags:
   - name: datastores
     description: Datastores API
@@ -407,5 +409,5 @@ securityDefinitions:
     tokenUrl: 'https://<servername>.thunderhead.com/one/oauth2token'
     scopes: {}
 # Added by API Auto Mocking Plugin
-host: virtserver.swaggerhub.com
+host: eu2.thunderhead.com
 basePath: /Thunderhead/Datastores/1.0.0
