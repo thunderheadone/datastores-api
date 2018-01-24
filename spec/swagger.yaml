@@ -396,7 +396,7 @@ definitions:
         description: Live or Staging reference Id
         example: dsed38429349314e0b96cceeab8f9922df
 
-# host: <servername>.thunderhead.com
+# host: eu2.thunderhead.com
 # basePath: /
 schemes:
   - https
@@ -406,7 +406,7 @@ securityDefinitions:
   OAuth2:
     type: oauth2
     flow: application
-    tokenUrl: 'https://<servername>.thunderhead.com/one/oauth2token'
+    tokenUrl: 'https://eu2.thunderhead.com/one/oauth2token'
     scopes: {}
 # Added by API Auto Mocking Plugin
 host: eu2.thunderhead.com
