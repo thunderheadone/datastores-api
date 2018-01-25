@@ -14,7 +14,7 @@ tags:
   - name: datastores
     description: Datastores API
 paths:
-  /datastores/1.0.0/{workspaceId}:
+  /{workspaceId}:
     parameters:
       - name: workspaceId
         in: path
@@ -62,7 +62,7 @@ paths:
         401:
           description: Invalid OAuth 2.0 token or Invalid workspaceId
 
-  /datastores/1.0.0/{workspaceId}/{datastoreApiName}:
+  /{workspaceId}/{datastoreApiName}:
     parameters:
       - name: workspaceId
         in: path
@@ -102,7 +102,7 @@ paths:
           description: Invalid OAuth 2.0 token
         404:
           description: Invalid workspaceId or Invalid datastoreApiName
-  /datastores/1.0.0/{workspaceId}/{datastoreApiName}/{target}/reference:
+  /{workspaceId}/{datastoreApiName}/{target}/reference:
     get:
       tags:
       - datastore
@@ -137,7 +137,7 @@ paths:
           description: Invalid OAuth 2.0 token
         404:
           description: Datastore with the specified api name was not found
-  /datastores/1.0.0/{workspaceId}/{datastoreApiName}/golive/{stagingReference}:
+  /{workspaceId}/{datastoreApiName}/golive/{stagingReference}:
     post:
       tags:
         - datastore
@@ -167,7 +167,7 @@ paths:
           description: Invalid OAuth 2.0 token
         404:
           description: The specified datastore api or staging reference name was not found
-  /datastores/1.0.0/{workspaceId}/{datastoreApiName}/{target}:
+  /{workspaceId}/{datastoreApiName}/{target}:
     parameters:
       - name: workspaceId
         in: path
@@ -410,4 +410,4 @@ securityDefinitions:
     scopes: {}
 # Added by API Auto Mocking Plugin
 host: eu2.thunderhead.com
-basePath: /Thunderhead/Datastores/1.0.0
+basePath: /thunderhead/datastores/1.0.0
