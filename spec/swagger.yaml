@@ -410,4 +410,4 @@ securityDefinitions:
     scopes: {}
 # Added by API Auto Mocking Plugin
 host: eu2.thunderhead.com
-basePath: /thunderhead/datastores/1.0.0
+basePath: /datastores/1.0.0
