@@ -353,12 +353,12 @@ definitions:
         description: |
           Specify the type of data to be stored. One of TEXT, BOOLEAN, NUMBER, DATETIME. The type for Primary and Secondary Keys must be TEXT.
 
-          | Data types | Description                                                  | Example             |
-          | ---------- | ------------------------------------------------------------ | ------------------- |
-          | TEXT       | String enclosed in quotes, single or double. Max 500 chars.  | "Campaigncode 2563" |
-          | BOOLEAN    | An unquoted lower case literal string of true or false.      | true                |
-          | NUMERIC    | An unquoted numeric value, which can include an exponent.    | 1233.667            |
-          | DATETIME   | Milliseconds since Jan 1st 1970 (Unix epoch time)            | 1517443199          |
+          | Data types | Description                                                                 | Example             |
+          | ---------- | --------------------------------------------------------------------------- | ------------------- |
+          | TEXT       | String enclosed in quotes, single or double. Max 500 chars.                 | "Campaigncode 2563" |
+          | BOOLEAN    | An unquoted lower case literal string of true or false.                     | true                |
+          | NUMERIC    | An unquoted numeric value of type double, which can include an exponent.    | 1233.667            |
+          | DATETIME   | Milliseconds since Jan 1st 1970 (Unix epoch time)                           | 1517443199          |
   InsertRecord:
     required:
       - primaryKey
