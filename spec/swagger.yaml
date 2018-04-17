@@ -322,9 +322,9 @@ definitions:
         type: string
         example: offerID
         description: >-
-          API name of the Secondary Key to use to access stored data. An
-          identifier that can reference multiple records in your datastore.
-          Provides an alternative way to look up data. For example, offerid.
+          API name of the Secondary Key to use to access stored data. An identifier
+          that provides further reference, in addition to the primary key, for an
+          entry in your Datastore.
       definitions:
         type: array
         items:
