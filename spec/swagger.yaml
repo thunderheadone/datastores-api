@@ -1,17 +1,15 @@
 swagger: '2.0'
 info:
   description: >-
-    The Datastores API provides you with the ability to upload and store large
-    volumes of customer data in the ONE environment. Storing the data within the
-    ONE environment provides better performance in terms of retrieving and accessing
-    data for decisioning in real-time. It also limits network traffic
-    between ONE and your existing ecosystem.
+    The Datastores API provides you with the ability to upload and store large volumes of customer data for decisioning.
+    Storing the data within a Datastore provides better performance in terms of retrieving and accessing data for
+    decisioning in real-time. It also limits network traffic between the decisioning engine and your existing ecosystem.
   version: 1.0.0
   title: Datastores API documentation
   x-logo:
     url: 'https://www.thunderhead.com/uploads/2015/07/Thunderhead_LogoIcon_Aubergine.png'
 tags:
-  - name: datastores
+  - name: Datastores
     description: Datastores API
 paths:
   /{workspaceId}:
@@ -20,19 +18,19 @@ paths:
         in: path
         description: >-
           The workspace ID for your Space. Found in the Welcome URL displayed
-          after you sign into ONE and select your Space. For example, MTIyMg.
+          after you sign in and select your Space. For example, MTIyMg.
         required: true
         type: string
     get:
       tags:
-        - datastore
+        - Datastore
       operationId: getDatastores
       produces:
         - application/json
-      description: List the datastores available for your Space.
+      description: List the Datastores available for your Space.
       responses:
         200:
-          description: Successfully get list of datastores in Space
+          description: Successfully get list of Datastores in Space
           schema:
             type: array
             items:
@@ -41,13 +39,13 @@ paths:
           description: Invalid OAuth 2.0 token or Invalid workspaceId
     post:
       tags:
-        - datastore
+        - Datastore
       operationId: createDatastore
       consumes:
         - application/json
       produces:
         - application/json
-      description: Create a new datastore in your Space.
+      description: Create a new Datastore in your Space.
       parameters:
         - in: body
           name: schema
@@ -68,7 +66,7 @@ paths:
         in: path
         description: >-
           The workspace ID for your Space. Found in the Welcome URL displayed
-          after you sign into ONE and select your Space. For example, MTIyMg
+          after you sign in and select your Space. For example, MTIyMg
         required: true
         type: string
       - name: datastoreApiName
@@ -78,24 +76,24 @@ paths:
         type: string
     delete:
       tags:
-        - datastore
+        - Datastore
       operationId: deleteDatastore
-      description: Delete a datastore from your Space
+      description: Delete a Datastore from your Space
       responses:
         200:
-          description: Successfully deleted datastore
+          description: Successfully deleted Datastore
         401:
           description: Invalid OAuth 2.0 token or Invalid workspaceId
         404:
           description: Invalid datastoreApiName
     get:
       tags:
-        - datastore
+        - Datastore
       operationId: getDatastoreInfo
-      description: Get information about specified datastore
+      description: Get information about specified Datastore
       responses:
         200:
-          description: Returns details about the datastore
+          description: Returns details about the Datastore
           schema:
             $ref: '#/definitions/Datastore'
         401:
@@ -105,7 +103,7 @@ paths:
   /{workspaceId}/{datastoreApiName}/{target}/reference:
     get:
       tags:
-      - datastore
+      - Datastore
       operationId: getReferenceId
       description: Returns the reference Id for the specified target
       produces:
@@ -115,7 +113,7 @@ paths:
         in: path
         description: >-
          The workspace ID for your Space. Found in the Welcome URL displayed
-         after you sign into ONE and select your Space. For example, MTIyMg.
+         after you sign in and select your Space. For example, MTIyMg.
         required: true
         type: string
       - name: datastoreApiName
@@ -136,16 +134,16 @@ paths:
         401:
           description: Invalid OAuth 2.0 token
         404:
-          description: Datastore with the specified api name was not found
+          description: Datastore with the specified API name was not found
   /{workspaceId}/{datastoreApiName}/golive/{stagingReference}:
     post:
       tags:
-        - datastore
+        - Datastore
       parameters:
       - name: workspaceId
         in: path
         description: The workspace ID for your Space. Found in the Welcome URL displayed
-          after you sign into ONE and select your Space . For example, MTIyMg
+          after you sign in and select your Space. For example, MTIyMg
         required: true
         type: string
       - name: datastoreApiName
@@ -166,14 +164,45 @@ paths:
         401:
           description: Invalid OAuth 2.0 token
         404:
-          description: The specified datastore api or staging reference name was not found
+          description: The specified Datastore API or staging reference name was not found
+  /{workspaceId}/{datastoreApiName}/clear/{tableReference}:
+      post:
+        tags:
+          - Datastore
+        parameters:
+        - name: workspaceId
+          in: path
+          description: The workspace ID for your Space. Found in the Welcome URL displayed
+            after you sign in and select your Space. For example, MTIyMg
+          required: true
+          type: string
+        - name: datastoreApiName
+          in: path
+          description: Datastore API Name
+          required: true
+          type: string
+        - name: tableReference
+          in: path
+          description: Table reference ID that points to the correct staging or live environment.
+            Can be acquired through the GET reference call.
+          required: true
+          type: string
+        operationId: clear
+        description: Clears the live or staging table
+        responses:
+          200:
+            description: OK
+          401:
+            description: Invalid OAuth 2.0 token
+          404:
+            description: The specified Datastore API or table reference name was not found
   /{workspaceId}/{datastoreApiName}/{target}:
     parameters:
       - name: workspaceId
         in: path
         description: >-
          The workspace ID for your Space. Found in the Welcome URL displayed
-         after you sign into ONE and select your Space. For example, MTIyMg.
+         after you sign in and select your Space. For example, MTIyMg.
         required: true
         type: string
       - name: datastoreApiName
@@ -188,9 +217,9 @@ paths:
         type: string
     get:
       tags:
-        - datastore
+        - Datastore
       operationId: queryDatastore
-      description: Query datastore
+      description: Query Datastore
       produces:
         - application/json
       parameters:
@@ -223,9 +252,9 @@ paths:
 
     delete:
       tags:
-        - datastore
+        - Datastore
       operationId: deleteDatastoreRecords
-      description: Delete records from datastore that match primary key and/or secondary key
+      description: Delete records from Datastore that match primary key and/or secondary key
       parameters:
         - name: pk
           in: query
@@ -239,16 +268,16 @@ paths:
           type: string
       responses:
         200:
-          description: Successfully deleted record from datastore
+          description: Successfully deleted record from Datastore
         401:
           description: Invalid OAuth 2.0 token
         404:
           description: Invalid workspaceId or Invalid datastoreApiName
     post:
       operationId: insertDatastoreRecord
-      description: Insert record into datastore
+      description: Insert record into Datastore
       tags:
-        - datastore
+        - Datastore
       consumes:
         - application/json
       produces:
@@ -272,7 +301,7 @@ paths:
                 OfferValue: 1
       responses:
         200:
-          description: Successfully inserted data into datastore
+          description: Successfully inserted data into Datastore
           schema:
             type: array
             items:
@@ -294,28 +323,27 @@ definitions:
         type: string
         example: My Datastore
         description: >-
-          Business name for your datastore, displayed in ONE. Limited to a
-          maximum 50 characters.
+          Business name for your Datastore. Limited to a maximum of 50 characters.
       apiName:
         type: string
         example: mydatastore
-        description: API name for your datastore.
+        description: API name for your Datastore.
       created:
         readOnly: true
         type: integer
         format: int64
-        description: Date when datastore was created in milliseconds since Jan 1st 1970 (Unix epoch time)
+        description: Date when Datastore was created in milliseconds since Jan 1st 1970 (Unix epoch time)
       lastModified:
         type: integer
         readOnly: true
         format: int64
-        description: Date when datastore was last modified in milliseconds since Jan 1st 1970 (Unix epoch time)
+        description: Date when Datastore was last modified in milliseconds since Jan 1st 1970 (Unix epoch time)
       primaryKey:
         type: string
         example: customerID
         description: >-
           API name of the Primary Key to use to access stored data. Identifies a
-          specific customer in your datastore. Used to look up data for
+          specific customer in your Datastore. Used to look up data for
           decisioning. Typically, this is a customer identifier such as a
           Customer key.
       secondaryKey:
@@ -346,19 +374,19 @@ definitions:
       name:
         type: string
         example: customerID
-        description: Name of the datastore column
+        description: Name of the Datastore column
       type:
         type: string
         example: TEXT
         description: |
           Specify the type of data to be stored. One of TEXT, BOOLEAN, NUMBER, DATETIME. The type for Primary and Secondary Keys must be TEXT.
 
-          | Data types | Description                                                                 | Example             |
-          | ---------- | --------------------------------------------------------------------------- | ------------------- |
-          | TEXT       | String enclosed in quotes, single or double. Max 500 chars.                 | "Campaigncode 2563" |
-          | BOOLEAN    | An unquoted lower case literal string of true or false.                     | true                |
-          | NUMERIC    | An unquoted numeric value of type double, which can include an exponent.    | 1233.667            |
-          | DATETIME   | Milliseconds since Jan 1st 1970 (Unix epoch time)                           | 1517443199          |
+          | Data types | Description                                                  | Example             |
+          | ---------- | ------------------------------------------------------------ | ------------------- |
+          | TEXT       | String enclosed in quotes, single or double. Max 500 chars.  | "Campaigncode 2563" |
+          | BOOLEAN    | An unquoted lower case literal string of true or false.      | true                |
+          | NUMERIC    | An unquoted numeric value, which can include an exponent.    | 1233.667            |
+          | DATETIME   | Milliseconds since Jan 1st 1970 (Unix epoch time)            | 1517443199          |
   InsertRecord:
     required:
       - primaryKey
@@ -396,7 +424,7 @@ definitions:
         description: Live or Staging reference Id
         example: dsed38429349314e0b96cceeab8f9922df
 
-# host: eu2.thunderhead.com
+# host: <servername>.thunderhead.com
 # basePath: /
 schemes:
   - https
