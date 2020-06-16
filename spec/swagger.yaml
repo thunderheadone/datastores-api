@@ -366,6 +366,8 @@ definitions:
             type: TEXT
           - name: offerValue
             type: NUMERIC
+          - name: offerList
+            type: TEXT_LIST
   Definition:
     required:
       - name
@@ -379,14 +381,16 @@ definitions:
         type: string
         example: TEXT
         description: |
-          Specify the type of data to be stored. One of TEXT, BOOLEAN, NUMBER, DATETIME. The type for Primary and Secondary Keys must be TEXT.
+          Specify the type of data to be stored. One of TEXT, LARGE_TEXT, BOOLEAN, NUMBER, DATETIME, TEXT_LIST. The type for Primary and Secondary Keys must be TEXT.
 
-          | Data types | Description                                                  | Example             |
-          | ---------- | ------------------------------------------------------------ | ------------------- |
-          | TEXT       | String enclosed in quotes, single or double. Max 500 chars.  | "Campaigncode 2563" |
-          | BOOLEAN    | An unquoted lower case literal string of true or false.      | true                |
-          | NUMERIC    | An unquoted numeric value, which can include an exponent.    | 1233.667            |
-          | DATETIME   | Milliseconds since Jan 1st 1970 (Unix epoch time)            | 1517443199          |
+          | Data types | Description                                                                  | Example             |
+          | ---------- | ---------------------------------------------------------------------------- | ------------------- |
+          | TEXT       | String enclosed in quotes, single or double. Max 500 chars.                  | "Campaigncode 2563" |
+          | LARGE_TEXT | String enclosed in quotes, single or double. Max 4096 chars. Max. 5 columns  | "Large HTML Content"|
+          | BOOLEAN    | An unquoted lower case literal string of true or false.                      | true                |
+          | NUMERIC    | An unquoted numeric value, which can include an exponent.                    | 1233.667            |
+          | DATETIME   | Milliseconds since Jan 1st 1970 (Unix epoch time)                            | 1517443199          |
+          | TEXT_LIST  | String representing a list of items, separated by '|'. Can be escaped with " | aa|bb|cc            |
   InsertRecord:
     required:
       - primaryKey
