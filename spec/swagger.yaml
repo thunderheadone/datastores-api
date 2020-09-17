@@ -410,7 +410,7 @@ definitions:
         description: The secondary key value of the record
       result:
         type: string
-        example: 204
+        example: "204"
         description: The result code of the insert operation.
       url:
         type: string
