@@ -357,6 +357,8 @@ definitions:
         type: array
         items:
           $ref: '#/definitions/Definition'
+        minItems: 1
+        maxItems: 40
         example:
           - name: customerID
             type: TEXT
