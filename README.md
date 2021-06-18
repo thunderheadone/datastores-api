@@ -1,5 +1,5 @@
 # Datastores OpenAPI Specification
-[![Build Status](https://travis-ci.org/thunderheadone/datastores-api.svg?branch=master)](https://travis-ci.org/thunderheadone/datastores-api)
+[![Build Status](https://travis-ci.com/thunderheadone/datastores-api.svg?branch=master)](https://travis-ci.com/thunderheadone/datastores-api)
 
 ## Links
 
