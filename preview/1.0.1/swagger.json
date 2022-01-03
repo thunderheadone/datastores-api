@@ -1,0 +1,555 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "The Datastores API provides you with the ability to upload and store large volumes of customer data in the ONE environment. Storing the data within the ONE environment provides better performance in terms of retrieving and accessing data for decisioning in real-time. It also limits network traffic between ONE and your existing ecosystem.",
+    "version": "1.0.0",
+    "title": "Datastores API documentation"
+  },
+  "tags": [
+    {
+      "name": "datastores",
+      "description": "Datastores API"
+    }
+  ],
+  "paths": {
+    "/datastores/1.0.0/{workspaceId}": {
+      "parameters": [
+        {
+          "name": "workspaceId",
+          "in": "path",
+          "description": "The workspace ID for your Space. Found in the Welcome URL displayed after you sign into ONE and select your Space. For example, MTIyMg.",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "datastore"
+        ],
+        "operationId": "getDatastores",
+        "produces": [
+          "application/json"
+        ],
+        "description": "List the datastores available for your Space.",
+        "responses": {
+          "200": {
+            "description": "Successfully get list of datastores in Space",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Datastore"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid OAuth 2.0 token or Invalid workspaceId"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "datastore"
+        ],
+        "operationId": "createDatastore",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "description": "Create a new datastore in your Space.",
+        "parameters": [
+          {
+            "in": "body",
+            "name": "schema",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success"
+          },
+          "400": {
+            "description": "Invalid type of primary key or secondary key"
+          },
+          "401": {
+            "description": "Invalid OAuth 2.0 token or Invalid workspaceId"
+          }
+        }
+      }
+    },
+    "/datastores/1.0.0/{workspaceId}/{datastoreApiName}": {
+      "parameters": [
+        {
+          "name": "workspaceId",
+          "in": "path",
+          "description": "The workspace ID for your Space. Found in the Welcome URL displayed after you sign into ONE and select your Space. For example, MTIyMg",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "datastoreApiName",
+          "in": "path",
+          "description": "Datastore API Name",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "delete": {
+        "tags": [
+          "datastore"
+        ],
+        "operationId": "deleteDatastore",
+        "description": "Delete a datastore from your Space",
+        "responses": {
+          "200": {
+            "description": "Successfully deleted datastore"
+          },
+          "401": {
+            "description": "Invalid OAuth 2.0 token or Invalid workspaceId"
+          },
+          "404": {
+            "description": "Invalid datastoreApiName"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "datastore"
+        ],
+        "operationId": "getDatastoreInfo",
+        "description": "Get information about specified datastore",
+        "responses": {
+          "200": {
+            "description": "Returns details about the datastore",
+            "schema": {
+              "$ref": "#/definitions/Datastore"
+            }
+          },
+          "401": {
+            "description": "Invalid OAuth 2.0 token"
+          },
+          "404": {
+            "description": "Invalid workspaceId or Invalid datastoreApiName"
+          }
+        }
+      }
+    },
+    "/datastores/1.0.0/{workspaceId}/{datastoreApiName}/{target}/reference": {
+      "get": {
+        "tags": [
+          "datastore"
+        ],
+        "operationId": "getReferenceId",
+        "description": "Returns the reference Id for the specified target",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace ID for your Space. Found in the Welcome URL displayed after you sign into ONE and select your Space. For example, MTIyMg.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "datastoreApiName",
+            "in": "path",
+            "description": "Datastore API Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "target",
+            "in": "path",
+            "description": "Target (live or staging)",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Live or Staging reference Id",
+            "schema": {
+              "$ref": "#/definitions/DatastoreReference"
+            }
+          },
+          "401": {
+            "description": "Invalid OAuth 2.0 token"
+          },
+          "404": {
+            "description": "Datastore with the specified api name was not found"
+          }
+        }
+      }
+    },
+    "/datastores/1.0.0/{workspaceId}/{datastoreApiName}/golive/{stagingReference}": {
+      "post": {
+        "tags": [
+          "datastore"
+        ],
+        "parameters": [
+          {
+            "name": "workspaceId",
+            "in": "path",
+            "description": "The workspace ID for your Space. Found in the Welcome URL displayed after you sign into ONE and select your Space . For example, MTIyMg",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "datastoreApiName",
+            "in": "path",
+            "description": "Datastore API Name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "stagingReference",
+            "in": "path",
+            "description": "Staging reference Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "operationId": "goLive",
+        "description": "Make the specified staging data live",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "401": {
+            "description": "Invalid OAuth 2.0 token"
+          },
+          "404": {
+            "description": "The specified datastore api or staging reference name was not found"
+          }
+        }
+      }
+    },
+    "/datastores/1.0.0/{workspaceId}/{datastoreApiName}/{target}": {
+      "parameters": [
+        {
+          "name": "workspaceId",
+          "in": "path",
+          "description": "The workspace ID for your Space. Found in the Welcome URL displayed after you sign into ONE and select your Space. For example, MTIyMg.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "datastoreApiName",
+          "in": "path",
+          "description": "Datastore API Name",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "target",
+          "in": "path",
+          "description": "Target (live or staging)",
+          "required": true,
+          "type": "string"
+        }
+      ],
+      "get": {
+        "tags": [
+          "datastore"
+        ],
+        "operationId": "queryDatastore",
+        "description": "Query datastore",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "query",
+            "description": "Primary Key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sk",
+            "in": "query",
+            "description": "Secondary key",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns results for primary key and optionally secondary key",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataRecordMap"
+              },
+              "example": [
+                {
+                  "customerId": "dp66492",
+                  "offerId": "offer-creditcard-082017",
+                  "OfferName": "Credit Card Summer Bonanza",
+                  "OfferValue": 1
+                }
+              ]
+            }
+          },
+          "401": {
+            "description": "Invalid OAuth 2.0 token"
+          },
+          "404": {
+            "description": "Invalid workspaceId or Invalid datastoreApiName"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "datastore"
+        ],
+        "operationId": "deleteDatastoreRecords",
+        "description": "Delete records from datastore that match primary key and/or secondary key",
+        "parameters": [
+          {
+            "name": "pk",
+            "in": "query",
+            "description": "Primary Key",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sk",
+            "in": "query",
+            "description": "Secondary key",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted record from datastore"
+          },
+          "401": {
+            "description": "Invalid OAuth 2.0 token"
+          },
+          "404": {
+            "description": "Invalid workspaceId or Invalid datastoreApiName"
+          }
+        }
+      },
+      "post": {
+        "operationId": "insertDatastoreRecord",
+        "description": "Insert record into datastore",
+        "tags": [
+          "datastore"
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "records",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataRecordMap"
+              },
+              "example": [
+                {
+                  "customerId": "dp66492",
+                  "offerId": "offer-creditcard-082017",
+                  "OfferName": "Credit Card Summer Bonanza",
+                  "OfferValue": 1
+                },
+                {
+                  "customerId": "dp66492",
+                  "offerId": "offer-mortgage-014204",
+                  "OfferName": "Mortgage Interest Rate Reduction",
+                  "OfferValue": 1
+                }
+              ]
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully inserted data into datastore",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InsertRecord"
+              }
+            }
+          },
+          "401": {
+            "description": "Invalid OAuth 2.0 token"
+          },
+          "404": {
+            "description": "Invalid workspaceId or Invalid datastoreApiName"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Datastore": {
+      "type": "object",
+      "required": [
+        "name",
+        "apiName",
+        "primaryKey",
+        "definitions"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "My Datastore",
+          "description": "Business name for your datastore, displayed in ONE. Limited to a maximum 50 characters."
+        },
+        "apiName": {
+          "type": "string",
+          "example": "mydatastore",
+          "description": "API name for your datastore."
+        },
+        "created": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "Date when datastore was created in milliseconds since Jan 1st 1970 (Unix epoch time)"
+        },
+        "lastModified": {
+          "type": "integer",
+          "readOnly": true,
+          "format": "int64",
+          "description": "Date when datastore was last modified in milliseconds since Jan 1st 1970 (Unix epoch time)"
+        },
+        "primaryKey": {
+          "type": "string",
+          "example": "customerID",
+          "description": "API name of the Primary Key to use to access stored data. Identifies a specific customer in your datastore. Used to look up data for decisioning. Typically, this is a customer identifier such as a Customer key."
+        },
+        "secondaryKey": {
+          "type": "string",
+          "example": "offerID",
+          "description": "API name of the Secondary Key to use to access stored data. An identifier that can reference multiple records in your datastore. Provides an alternative way to look up data. For example, offerid."
+        },
+        "definitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Definition"
+          },
+          "example": [
+            {
+              "name": "customerID",
+              "type": "TEXT"
+            },
+            {
+              "name": "offerID",
+              "type": "TEXT"
+            },
+            {
+              "name": "offerName",
+              "type": "TEXT"
+            },
+            {
+              "name": "offerValue",
+              "type": "NUMERIC"
+            }
+          ]
+        }
+      }
+    },
+    "Definition": {
+      "required": [
+        "name",
+        "type"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "customerID",
+          "description": "Name of the datastore column"
+        },
+        "type": {
+          "type": "string",
+          "example": "TEXT",
+          "description": "Specify the type of data to be stored. One of TEXT, BOOLEAN, NUMBER, DATETIME. The type for Primary and Secondary Keys must be TEXT.\n\n| Data types | Description                                                  | Example             |\n| ---------- | ------------------------------------------------------------ | ------------------- |\n| TEXT       | String enclosed in quotes, single or double. Max 500 chars.  | \"Campaigncode 2563\" |\n| BOOLEAN    | An unquoted lower case literal string of true or false.      | true                |\n| NUMERIC    | An unquoted numeric value, which can include an exponent.    | 1233.667            |\n| DATETIME   | Milliseconds since Jan 1st 1970 (Unix epoch time)            | 1517443199          |\n"
+        }
+      }
+    },
+    "InsertRecord": {
+      "required": [
+        "primaryKey",
+        "secondaryKey",
+        "result",
+        "url"
+      ],
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "example": "johndoe@somedomain.com",
+          "description": "The primary key value of the record"
+        },
+        "secondaryKey": {
+          "type": "string",
+          "example": "SomeOfferCode",
+          "description": "The secondary key value of the record"
+        },
+        "result": {
+          "type": "string",
+          "example": 204,
+          "description": "The result code of the insert operation."
+        },
+        "url": {
+          "type": "string",
+          "example": "http://api.thunderhead.com/datastores/someapi/live?pk=johndoe@somedomain.com&sk=SomeOfferCode",
+          "description": "The url to the inserted record"
+        }
+      }
+    },
+    "DataRecordMap": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object"
+      }
+    },
+    "DatastoreReference": {
+      "type": "object",
+      "required": [
+        "referenceId"
+      ],
+      "properties": {
+        "referenceId": {
+          "type": "string",
+          "description": "Live or Staging reference Id",
+          "example": "dsed38429349314e0b96cceeab8f9922df"
+        }
+      }
+    }
+  },
+  "schemes": [
+    "https"
+  ],
+  "security": [
+    {
+      "OAuth2": []
+    }
+  ],
+  "securityDefinitions": {
+    "OAuth2": {
+      "type": "oauth2",
+      "flow": "application",
+      "tokenUrl": "https://<servername>.thunderhead.com/one/oauth2token",
+      "scopes": {}
+    }
+  },
+  "host": "virtserver.swaggerhub.com",
+  "basePath": "/Thunderhead/Datastores/1.0.0"
+}
